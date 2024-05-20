@@ -1,12 +1,11 @@
 import { useState } from 'react'
 import './App.css'
-import Navigation from "./Navbar"
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json'
 import seashore from '../artifacts/contracts/NFTMarketplace.sol/seashore.json'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import {Spinner} from 'react-bootstrap'
 import {ethers} from 'ethers'
 import Home from './Home.jsx'
+import Navbar from './Navbar'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -67,29 +66,23 @@ function App() {
     <BrowserRouter>
     <div>
       <>
-      <Navigation web3Handler={requestAccount} account={account}></Navigation>
+      <Navbar web3Handler={requestAccount} account={account}></Navbar>
         </>
       <div>
           {loading ? (
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
-              <Spinner animation="border" style={{ display: 'flex' }} />
-              <p className='mx-3 my-0' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>Awaiting Metamask Connection...</p>
+            <div className='flex justify-center'>
+              {/* <p className='mx-3 my-0' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>Awaiting Metamask Connection...</p> */}
             </div>
           ) : (
-            <Routes>
-              <Route path="/" element={
-                <Home marketplace={marketplace} nft={nft} />
-              } />
-              {/* <Route path="/create" element={
-                <Create marketplace={marketplace} nft={nft} />
-              } />
-              <Route path="/my-listed-items" element={
-                <MyListedItems marketplace={marketplace} nft={nft} account={account} />
-              } />
-              <Route path="/my-purchases" element={
-                <MyPurchases marketplace={marketplace} nft={nft} account={account} />
-              } /> */}
-            </Routes>
+            // <Routes>
+            //   <Route path="/" element={
+            //     <Home marketplace={marketplace} nft={nft} />
+            //   } />
+              
+            // </Routes>
+            <div>
+              <h1>Hello</h1>
+            </div>
           )}
         </div>
         
