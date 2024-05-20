@@ -6,6 +6,9 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {ethers} from 'ethers'
 import Home from './Home.jsx'
 import Navbar from './Navbar'
+import Create from './Create'
+import MyListedItems from './ListedItems'
+import MyPurchases from './Purchases'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -74,15 +77,14 @@ function App() {
               {/* <p className='mx-3 my-0' style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>Awaiting Metamask Connection...</p> */}
             </div>
           ) : (
-            // <Routes>
-            //   <Route path="/" element={
-            //     <Home marketplace={marketplace} nft={nft} />
-            //   } />
-              
-            // </Routes>
-            <div>
-              <h1>Hello</h1>
-            </div>
+            <Routes>
+              <Route path="/" element={
+                <Home marketplace={marketplace} nft={nft} />
+              } />
+              <Route path="create" element={<Create marketplace={marketplace} nft={nft} account={account}/>}/>
+              <Route path='listed' element={<MyListedItems marketplace={marketplace} nft={nft} account={account}/>}/>
+              <Route path='purchases' element={<MyPurchases marketplace={marketplace} nft={nft} account={account}/>}/>
+            </Routes>
           )}
         </div>
         

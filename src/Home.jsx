@@ -49,37 +49,31 @@ const Home = ({ marketplace, nft }) => {
   )
   return (
     <div className="flex justify-center">
-      {items.length > 0 ?
-        <div className="px-5 container">
-          <Row xs={1} md={2} lg={4} className="g-4 py-5">
-            {items.map((item, idx) => (
-              <Col key={idx} className="overflow-hidden">
-                <Card>
-                  <Card.Img variant="top" src={item.image} />
-                  <Card.Body color="secondary">
-                    <Card.Title>{item.name}</Card.Title>
-                    <Card.Text>
-                      {item.description}
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    <div className='d-grid'>
-                      <Button onClick={() => buyMarketItem(item)} variant="primary" size="lg">
-                        Buy for {ethers.utils.formatEther(item.price)} ETH
-                      </Button>
-                    </div>
-                  </Card.Footer>
-                </Card>
-              </Col>
-            ))}
-          </Row>
+      {items.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-5 py-5">
+          {items.map((item, idx) => (
+            <div key={idx} className="rounded-lg overflow-hidden shadow-md">
+              <img src={item.image} className="w-full h-48 object-cover" alt={item.name} />
+              <div className="p-4">
+                <h5 className="text-lg font-bold">{item.name}</h5>
+                <p className="text-gray-700">{item.description}</p>
+              </div>
+              <div className="flex items-center justify-between p-4 border-t border-gray-200">
+                <span className="text-gray-700">{ethers.utils.formatEther(item.price)} ETH</span>
+                <button onClick={() => buyMarketItem(item)} className="px-3 py-2 rounded-md bg-indigo-500 text-white font-bold hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700">
+                  Buy
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-        : (
-          <main style={{ padding: "1rem 0" }}>
-            <h2>No listed assets</h2>
-          </main>
-        )}
+      ) : (
+        <main className="text-center py-8">
+          <h2 className="text-xl font-bold">No listed assets</h2>
+        </main>
+      )}
     </div>
   );
+  
 }
 export default Home
