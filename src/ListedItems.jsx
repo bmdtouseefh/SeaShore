@@ -62,11 +62,11 @@ export default function MyListedItems({ marketplace, nft, account }) {
   useEffect(() => {
     loadListedItems()
   }, [])
-  if (loading) return (
-    <main style={{ padding: "1rem 0" }}>
-      <h2>Loading...</h2>
-    </main>
-  )
+  // if (loading) return (
+  //   <main style={{ padding: "1rem 0" }}>
+  //     <h2>Loading...</h2>
+  //   </main>
+  // )
   return (
     <div className="flex justify-center">
       {listedItems.length > 0 ? (

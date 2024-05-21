@@ -37,34 +37,33 @@ export default function MyPurchases({ marketplace, nft, account }) {
   useEffect(() => {
     loadPurchasedItems()
   }, [])
-  if (loading) return (
-    <main style={{ padding: "1rem 0" }}>
-      <h2>Loading...</h2>
-    </main>
-  )
+  // if (loading) return (
+  //   <main style={{ padding: "1rem 0" }}>
+  //     <h2>Loading...</h2>
+  //   </main>
+  // )
   return (
     <div className="flex justify-center">
       {purchases.length > 0 ? (
         <div className="container px-5 py-5">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4"> {/* Replaced Row with grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {purchases.map((item, idx) => (
-              <div key={idx} className="overflow-hidden">
-                <Card> {/* Assuming Card is a custom component or styled element */}
-                  <Card.Img variant="top" src={item.image} /> {/* Assuming Card.Img is a child component of Card */}
-                  <Card.Footer className="text-right"> {/* Added text-right for right alignment */}
-                    {ethers.utils.formatEther(item.totalPrice)} ETH
-                  </Card.Footer>
-                </Card>
+              <div key={idx} className="bg-white rounded shadow-md overflow-hidden"> {/* Added styles for card-like appearance */}
+                <img src={item.image} className="w-full h-48 object-cover" alt="Purchase Image" /> {/* Assuming image */}
+                <div className="px-4 py-2 text-right"> {/* Added padding and right alignment */}
+                  {ethers.utils.formatEther(item.totalPrice)} ETH
+                </div>
               </div>
             ))}
           </div>
         </div>
       ) : (
-        <main className="text-center px-4 py-4"> {/* Added text-center for centering */}
+        <main className="text-center px-4 py-4">
           <h2>No purchases</h2>
         </main>
       )}
     </div>
   );
+  
   
 }

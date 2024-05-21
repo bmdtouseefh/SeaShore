@@ -1,23 +1,35 @@
+import { createHelia } from "helia"
 import { useState } from "react"
+
 
 const Create = ({ marketplace, nft, account }) => {
     const [image, setImage] = useState('')
     const [price, setPrice] = useState(null)
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
+    
+
     const uploadToIPFS = async (event) => {
-      event.preventDefault()
-      const file = event.target.files[0]
-      if (typeof file != 'undefined') {
+      event.preventDefault();
+      const file = event.target.files[0];
+    
+      if (typeof file !== 'undefined') {
         try {
-          const result = await client.add(file)
-          console.log(result)
-          setImage(`https://ipfs.infura.io/ipfs/${result.path}`)
-        } catch (error){
-          console.log("ipfs image upload error: ", error)
+          // Create a Helia node instance
+          const helia = await createHelia();
+    
+          // Add the file to IPFS using Helia
+          const result = await helia.add(file);
+          console.log(result);
+    
+          // Update image URL with IPFS path
+          setImage(`ipfs://${result.cid}`);
+        } catch (error) {
+          console.log("IPFS image upload error:", error);
         }
       }
-    }
+    };
+    
     const createNFT = async () => {
         if (!image || !price || !name || !description) return
         try{
