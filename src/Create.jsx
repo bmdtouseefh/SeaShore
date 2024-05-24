@@ -17,13 +17,14 @@ const Create = ({ marketplace, nft, account }) => {
         try {
           // Create a Helia node instance
           const helia = await createHelia();
+          const fs = new UnixFS(helia);
     
           // Add the file to IPFS using Helia
-          const result = await helia.add(file);
+          const result = await fs.add(file);
           console.log(result);
     
           // Update image URL with IPFS path
-          setImage(`ipfs://${result.cid}`);
+          //setImage(`ipfs://${result.cid}`);
         } catch (error) {
           console.log("IPFS image upload error:", error);
         }
